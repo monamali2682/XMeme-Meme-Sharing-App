@@ -1,4 +1,4 @@
-package com.crio.starter.data;
+package com.crio.starter.Models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

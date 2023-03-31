@@ -14,4 +14,10 @@ public class GreetingsService {
   public ResponseDto getMessage(String id) {
     return new ResponseDto(greetingsRepository.findByExtId(id).getMessage());
   }
+
+  // public ResponseDto getLatest() {
+  //   Pageable pageable = PageRequest.of(0, 100, Sort.by("_id").descending());
+  //   //Pageable pageable = PageRequest.of(0, 10);
+  //   return new ResponseDto(greetingsRepository.findTop10By_id(pageable));
+  // }
 }
