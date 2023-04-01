@@ -31,7 +31,7 @@ public class MemeController {
       GetMemesResponse getMemesResponse;
       //CHECKSTYLE:OFF
       getMemesResponse = memeService.findLatest100Memes();
-      if(getMemesResponse.getMemes().isEmpty()) return ResponseEntity.ok(getMemesResponse);
+      if(getMemesResponse.getMemes().isEmpty()) return ResponseEntity.ok().body(null);
       //log.info("getRestaurants returned {}", getRestaurantsResponse);
       return ResponseEntity.ok().body(getMemesResponse);
       //CHECKSTYLE:ON
