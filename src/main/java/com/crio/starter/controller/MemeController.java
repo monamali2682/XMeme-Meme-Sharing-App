@@ -1,5 +1,10 @@
 package com.crio.starter.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.validation.Valid;
+import com.crio.starter.Dto.EmptyJson;
+import com.crio.starter.Dto.Meme;
 import com.crio.starter.exchange.GetMemeGivenIdResponse;
 import com.crio.starter.exchange.GetMemesResponse;
 import com.crio.starter.exchange.PostMemeRequest;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,15 +34,15 @@ public class MemeController {
   private MemeService memeService;
 
   @GetMapping(GET_MEMES_API)
-  public ResponseEntity<GetMemesResponse> getMemes() {
+  public ResponseEntity getMemes() {
       HttpHeaders headers = new HttpHeaders();
       headers.add("Content-Type", "application/json");
       //log.info("getRestaurants called with {}", getRestaurantsRequest);
       //CHECKSTYLE:OFF
       GetMemesResponse getMemesResponse = memeService.findLatest100Memes();
-      if(getMemesResponse.getMemes().isEmpty()) return new ResponseEntity<>(headers, HttpStatus.OK); ;
+      if(getMemesResponse.getMemes().isEmpty()) return new ResponseEntity<>(new EmptyJson(), HttpStatus.OK); ;
       //log.info("getRestaurants returned {}", getRestaurantsResponse);
-      return new ResponseEntity<>(getMemesResponse, headers, HttpStatus.OK);
+      return new ResponseEntity<>(getMemesResponse.getMemes(), headers, HttpStatus.OK);
       //CHECKSTYLE:ON
   }
 
@@ -51,7 +58,7 @@ public class MemeController {
   }
 
   @PostMapping(POST_MEME_API)
-  public ResponseEntity<PostMemeResponse> addMeme(@RequestBody PostMemeRequest postMemeRequest){
+  public ResponseEntity<PostMemeResponse> addMeme(@RequestBody @Valid PostMemeRequest postMemeRequest){
     PostMemeResponse postMemeResponse = memeService.addMeme(postMemeRequest);
     if(postMemeResponse.isDuplicate()==true){
       throw new ResponseStatusException(HttpStatus.CONFLICT, "Duplicate meme!");
