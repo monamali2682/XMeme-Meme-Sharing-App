@@ -31,9 +31,8 @@ public class MemeController {
       HttpHeaders headers = new HttpHeaders();
       headers.add("Content-Type", "application/json");
       //log.info("getRestaurants called with {}", getRestaurantsRequest);
-      GetMemesResponse getMemesResponse;
       //CHECKSTYLE:OFF
-      getMemesResponse = memeService.findLatest100Memes();
+      GetMemesResponse getMemesResponse = memeService.findLatest100Memes();
       if(getMemesResponse.getMemes().isEmpty()) return new ResponseEntity<>(headers, HttpStatus.OK); ;
       //log.info("getRestaurants returned {}", getRestaurantsResponse);
       return new ResponseEntity<>(getMemesResponse, headers, HttpStatus.OK);
