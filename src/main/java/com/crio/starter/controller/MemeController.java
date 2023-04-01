@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@Validated
 public class MemeController {
   
   public static final String POST_MEME_API = "/memes/";
@@ -58,7 +60,8 @@ public class MemeController {
   }
 
   @PostMapping(POST_MEME_API)
-  public ResponseEntity<PostMemeResponse> addMeme(@RequestBody @Valid PostMemeRequest postMemeRequest){
+  public ResponseEntity<PostMemeResponse> addMeme(@Valid @RequestBody PostMemeRequest postMemeRequest){
+    //if(postMemeRequest==null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data can not be empty!");
     PostMemeResponse postMemeResponse = memeService.addMeme(postMemeRequest);
     if(postMemeResponse.isDuplicate()==true){
       throw new ResponseStatusException(HttpStatus.CONFLICT, "Duplicate meme!");
