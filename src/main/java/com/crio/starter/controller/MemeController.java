@@ -6,6 +6,7 @@ import com.crio.starter.exchange.PostMemeRequest;
 import com.crio.starter.exchange.PostMemeResponse;
 import com.crio.starter.service.MemeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,13 +28,15 @@ public class MemeController {
 
   @GetMapping(GET_MEMES_API)
   public ResponseEntity<GetMemesResponse> getMemes() {
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Content-Type", "application/json");
       //log.info("getRestaurants called with {}", getRestaurantsRequest);
       GetMemesResponse getMemesResponse;
       //CHECKSTYLE:OFF
       getMemesResponse = memeService.findLatest100Memes();
-      if(getMemesResponse.getMemes().isEmpty()) return ResponseEntity.ok().body(null);
+      if(getMemesResponse.getMemes().isEmpty()) return new ResponseEntity<>(headers, HttpStatus.OK); ;
       //log.info("getRestaurants returned {}", getRestaurantsResponse);
-      return ResponseEntity.ok().body(getMemesResponse);
+      return new ResponseEntity<>(getMemesResponse, headers, HttpStatus.OK);
       //CHECKSTYLE:ON
   }
 
