@@ -14,6 +14,7 @@ import com.crio.starter.Models.MemeEntity;
 import org.modelmapper.ModelMapper;
 //import org.modelmapper.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
 import java.util.Arrays;
 import com.crio.starter.DAO.MemeDao;
 
@@ -31,6 +32,7 @@ public class MemeRepositoryImpl implements MemeRepository {
     public List<Meme> findLatestMemes(){
         Pageable pageable = PageRequest.of(0, 100, Sort.by("id").descending());
         List<MemeEntity> allMemes=memeDao.findAll(pageable).getContent();
+        if(allMemes.isEmpty()) return new ArrayList<>();
         Meme[] memes= modelMapper.map(allMemes, Meme[].class);
         return Arrays.asList(memes);
         //PageRequest request = new PageRequest(0, 100, new Sort(Direction.DESC, "created"));
