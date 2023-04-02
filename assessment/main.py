@@ -141,14 +141,14 @@ class XMemeAssessment(TestCase):
         # print("verify that response status code is one of " + str(self.POSITIVE_STATUS_CODES))
         self.assertIn(response.status_code, self.POSITIVE_STATUS_CODES)
         data = self.decode_and_load_json(response)
-        # print('First post data: ', data)
+        print('First post data: ', data)
 
         # inserted, now get it using get api.
         endpoint = 'memes/{}'.format(data["id"])
         response = self.get_api(endpoint)
         self.assertIn(response.status_code, self.POSITIVE_STATUS_CODES)
         data = self.decode_and_load_json(response)
-        # print('get single: ', data)
+        print('get single: ', data)
         self.assertEqual(data["name"], 'crio-user' + "9999")
         self.assertEqual(data["caption"], 'crio-meme' + "9999")
         self.assertEqual(data["url"], self.SAMPLE_URL + self.FIRST_POST)

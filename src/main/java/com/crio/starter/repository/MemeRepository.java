@@ -4,6 +4,8 @@ import java.util.List;
 import com.crio.starter.Dto.Meme;
 import com.crio.starter.Models.MemeEntity;
 
+
+
 public interface MemeRepository {
     /**
    * Get the list of all the latest 100 memes

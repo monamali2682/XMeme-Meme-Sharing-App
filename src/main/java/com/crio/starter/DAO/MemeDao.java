@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-@Entity
+@Repository
 public interface MemeDao extends MongoRepository<MemeEntity,String> {
     
     // findAll() method is already there 

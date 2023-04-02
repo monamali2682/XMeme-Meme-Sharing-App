@@ -5,8 +5,6 @@ import com.crio.starter.Dto.Meme;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import com.crio.starter.Models.MemeEntity;
 // import com.mongodb.internal.inject.Provider;
@@ -19,7 +17,7 @@ import java.util.Arrays;
 import com.crio.starter.DAO.MemeDao;
 
 
-@Repository
+@Service
 public class MemeRepositoryImpl implements MemeRepository {
 
     @Autowired

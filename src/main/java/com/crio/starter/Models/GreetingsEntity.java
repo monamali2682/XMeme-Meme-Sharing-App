@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisHash;
 @Data
 @Document(collection = "greetings")
 @NoArgsConstructor
-@RedisHash
+//@RedisHash
 public class GreetingsEntity {
 
   private String extId;

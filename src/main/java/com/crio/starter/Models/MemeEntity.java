@@ -1,7 +1,9 @@
 package com.crio.starter.Models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
@@ -13,35 +15,33 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.redis.core.RedisHash;
 
 @Data
+@AllArgsConstructor
+@Entity
 @Document(collection = "memes")
 @NoArgsConstructor
-@RedisHash
+//@RedisHash
 public class MemeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @NonNull
-  @NotNull
-    @NotBlank
-    @NotEmpty
   private String id;
 
   @NonNull
   @NotNull
-    @NotBlank
-    @NotEmpty
+  @NotBlank(message = "meme name is required")
+  @NotEmpty
   private String name;
 
   @NonNull
   @NotNull
-    @NotBlank
-    @NotEmpty
+  @NotBlank(message = "Meme image url is required")
+  @NotEmpty
   private String url;
 
   @NonNull
   @NotNull
-    @NotBlank
-    @NotEmpty
+  @NotBlank(message = "Meme caption is required")
+  @NotEmpty
   private String caption;
 
   public MemeEntity(String name, String url, String caption) {
