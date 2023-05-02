@@ -10,7 +10,7 @@ XMeme is a simple backend web application where users can post and see memes.
 -Wrote modular code following MVCS layering architecture.
 
 Skills used
-Core Java, Backend Server, Jackson, Spring Boot, Spring Data, REST API, MongoDB, Docker and Swagger
+Core Java, Backend Server, Jackson, Spring Boot, Spring Data, REST API, MongoDB
 
 What's included: 
 1. Gradle file created from start.spring.io
